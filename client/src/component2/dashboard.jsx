@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Shell from '../common/shell';
-import Logiin from "../pages/Login/Login"
 import menu from '../common/menu';
 import DashboardHome from './dashboard-home';
 import Users from "../component2/Users/users";

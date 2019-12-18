@@ -1,5 +1,6 @@
 
 
+
 .nav-bg {
     background-color: #000;
     padding-left: 30%;
@@ -8,7 +9,7 @@
     
 }
 .logo1 {
-    margin-left: 15rem;
+    margin-left: 10rem;
 }
 .button {
     background: rgb(16, 199, 190);
@@ -41,4 +42,5 @@
     .logo1 {
         margin-left: 0%;
     }
+
 }

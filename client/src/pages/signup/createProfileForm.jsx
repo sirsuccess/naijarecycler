@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-// import axios from 'axios';
+import Axios from "axios";
 import { Alert } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 export default function CreateForm() {
+  let history = useHistory();
   const initialDetails = {
     firstName: "",
     lastName: "",
@@ -15,10 +16,11 @@ export default function CreateForm() {
     username: "",
     email: "",
     confirmPass: "",
-    password: ""
+    password: "",
+    isAdmin: false
   };
   const [userDetails, setuserDetails] = useState(initialDetails);
-  const [response, setResponse] = useState("");
+  const [responseAlert, setResponseAlert] = useState("");
 
   const handleChange = e => {
     e.preventDefault();
@@ -27,40 +29,41 @@ export default function CreateForm() {
     setuserDetails({ ...userDetails, [name]: value });
   };
 
-  const handleSubmit = async e => {
-    e.preventDefault();
-    const url = "http://localhost:5000/users";
+  function handleSubmit(e) {
+    console.log(JSON.stringify(userDetails));
 
-    try {
-      const response = await fetch(url, {
-        method: "POST", // or 'PUT'
-        body: JSON.stringify(userDetails), // data can be `string` or {object}!
-        headers: {
-          "Content-Type": "application/json"
-        }
+    e.preventDefault();
+    const url = "http://localhost:5000/users/api";
+    Axios.post(url, JSON.stringify(userDetails), {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(function(response) {
+        alert("you have successfully registered");
+        history.push({
+          pathname: "/login",
+          search: "?query=abc",
+          state: { detail: response.data }
+        });
+      })
+      .catch(function(error) {
+        setResponseAlert("Oop something when wrong try again");
       });
-      const json = await response.json();
-      console.log("Success:", JSON.stringify(json));
-      // alert("account created suucedully")
-      setResponse("account created");
-    } catch (error) {
-      console.error("Error:", error);
-      alert("Oop! something happen, try again");
-      // setResponse(error);
-    }
-  };
+  }
   const ComparePass = () => {
     console.log("i just blue");
     if (userDetails.password !== userDetails.confirmPass) {
-      return setResponse("confirm password does not match password");
+      return setResponseAlert("confirm password does not match password");
     }
-    return setResponse("");
+    return setResponseAlert("");
   };
-  console.log(userDetails);
 
   return (
     <>
-      <div>{response ? <Alert color="warning">{response}</Alert> : null}</div>
+      <div>
+        {responseAlert ? <Alert color="warning">{responseAlert}</Alert> : null}
+      </div>
       <div style={{ marginTop: "20px" }}>
         <h3>Create Profile</h3>
       </div>
@@ -112,16 +115,6 @@ export default function CreateForm() {
         </div>
         <div className="row">
           <div className="col-lg-6">
-            <Label htmlFor="state">state:</Label>
-            <input
-              type="text"
-              className="form-control"
-              name="state"
-              required
-              onChange={handleChange}
-            />
-          </div>
-          <div className="col-lg-6">
             <Label htmlFor="city">City:</Label>
             <input
               type="text"
@@ -130,6 +123,56 @@ export default function CreateForm() {
               required
               onChange={handleChange}
             />
+          </div>
+          <div className="col-lg-6">
+            <Label htmlFor="State">State:</Label>
+            <br />
+            <select
+              name="state"
+              className="form-control"
+              required
+              id="state"
+              onChange={handleChange}
+            >
+              <option value="null">State</option>
+              <option value="ABUJA FCT">ABUJA FCT</option>
+              <option value="ABIA">ABIA</option>
+              <option value="">ADAMAWA</option>
+              <option value="ADAMAWA">AKWA IBOM</option>
+              <option value="">ANAMBRA</option>
+              <option value="ANAMBRA">BAUCHI</option>
+              <option value="BAYELSA">BAYELSA</option>
+              <option value="BENUE">BENUE</option>
+              <option value="BORNO">BORNO</option>
+              <option value="CROSS RIVER">CROSS RIVER</option>
+              <option value="DELTA">DELTA</option>
+              <option value="EBONYI">EBONYI</option>
+              <option value="EDO">EDO</option>
+              <option value="EKITI">EKITI</option>
+              <option value="ENUGU">ENUGU</option>
+              <option value="GOMBE">GOMBE</option>
+              <option value="IMO">IMO</option>
+              <option value="JIGAWA">JIGAWA</option>
+              <option value="KADUNA">KADUNA</option>
+              <option value="KANO">KANO</option>
+              <option value="KATSINA">KATSINA</option>
+              <option value="KEBBI">KEBBI</option>
+              <option value="KOGI">KOGI</option>
+              <option value="KWARA">KWARA</option>
+              <option value="">LAGOS</option>
+              <option value="LAGOS">NASSARAWA</option>
+              <option value="NIGER">NIGER</option>
+              <option value="OGUN">OGUN</option>
+              <option value="ONDO">ONDO</option>
+              <option value="OSUN">OSUN</option>
+              <option value="OYO">OYO</option>
+              <option value="PLATEAU">PLATEAU</option>
+              <option value="RIVERS">RIVERS</option>
+              <option value="SOKOTO">SOKOTO</option>
+              <option value="TARABA">TARABA</option>
+              <option value="YOBE">YOBE</option>
+              <option value="ZAMFARA">ZAMFARA</option>
+            </select>
           </div>
         </div>
         <div className="row">

@@ -7,15 +7,31 @@ const router = express.Router();
 /**
  * Create a new user
  */
-router.post("/", async (req, res) => {
-  try {
-    const user = new User(req.body);
-    await user.save();
-    const token = await user.generateAuthToken();
-    res.status(201).send({ user, token });
-  } catch (error) {
-    res.status(400).send(error);
-  }
+// router.post("/", async (req, res) => {
+//   try {
+//     const user = new User(req.body);
+//     await user.save();
+//     const token = await user.generateAuthToken();
+//     res.status(201).send({ user, token });
+//   } catch (error) {
+//     res.status(400).send(error);
+//   }
+// });
+
+/**
+ * Create a new user
+ */
+router.post("/api", (req, res) => {
+  const userDB = new User(req.body);
+  return userDB
+    .save()
+    .then(user => {
+      console.log(user);
+      return res.status(201).json({ msg: "user created successfull" });
+    })
+    .catch(() => {
+      return res.status(404).json({ msg: "user not created" });
+    });
 });
 
 /**
@@ -23,15 +39,17 @@ router.post("/", async (req, res) => {
  */
 router.post("/login", async (req, res) => {
   try {
-    const { email, password } = req.body;
-    const user = await User.findByCredentials(email, password);
+    const { username, password } = req.body;
+    const user = await User.findByCredentials(username, password);
+    console.log("this is users",user);
+    
     if (!user) {
       return res
         .status(401)
         .send({ error: "Login failed! Check authentication credentials" });
     }
-    const token = await user.generateAuthToken();
-    res.send({ user, token });
+    // const token = await user.generateAuthToken();
+    return res.status(200).send(user);
   } catch (error) {
     res.status(400).send(error);
   }
@@ -51,15 +69,18 @@ router.get("/", (_req, res) => {
     });
 });
 
-router.get("/:email", (req, res) => {
+router.get("/log", (req, res) => {
   //get single users by email
-  const email = req.params.email;
-  User.findOne({ email })
+  const username = req.params.username;
+  console.log(username);
+  
+  User.findOne({ username })
     .then(userData => {
+
       if (userData) {
         return res.status(200).json(userData);
       }
-      return res.status(404).json({ msg: "no user found" });
+      return res.status(404).json({ msg: userData });
     })
     .catch(err => {
       return res.status(500).json({ msg: `err occour: ${err}` });
@@ -101,8 +122,7 @@ router.patch("/:id", (req, res) => {
   const userID = req.params.id;
   const userBody = req.body;
 
-  return User
-    .update({ _id: userID }, { $set: userBody })
+  return User.update({ _id: userID }, { $set: userBody })
     .then(user => {
       console.log(user);
       return res.status(201).json({ msg: "user updated successfully" });
@@ -118,8 +138,7 @@ router.patch("/:id", (req, res) => {
 router.delete("/:id", (req, res) => {
   const userID = req.params.id;
 
-  return User
-    .findByIdAndDelete(userID)
+  return User.findByIdAndDelete(userID)
     .then(user => {
       console.log(user);
       return res.status(200).json({ msg: "user deleted" });

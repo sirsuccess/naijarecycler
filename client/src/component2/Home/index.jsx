@@ -19,13 +19,13 @@ function Home() {
 
                 <div className="home-div-div">
                 <img src="https://img.icons8.com/material/64/FFA500/recycle-sign.png"  alt="sign up" height="50" />
-                    <p className="home-div-div-paragraph">We recycle on average<br /> 95% of the waste</p>
+                    <p className="home-div-div-paragraph">We intend to recycle on an average<br /> of 95% of the waste</p>
 
                 </div>
 
                 <div className="home-div-div">
                 <img src="https://img.icons8.com/ios-glyphs/64/FFA500/compost-heap.png"  alt="" height="50" />
-                    <p className="home-div-div-paragraph">We turn organic<br /> waste into compost</p>
+                    <p className="home-div-div-paragraph">We intend to turn organic<br /> waste into compost</p>
 
                 </div>
             </div>

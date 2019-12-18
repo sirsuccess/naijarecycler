@@ -64,7 +64,4 @@ const LoginContent = styled.div`
   }
 `;
 
-const ImageHolder = styled.div`
-  width: 190px;
-  height: 50px;
-`;
+

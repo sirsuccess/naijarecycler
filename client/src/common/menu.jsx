@@ -5,11 +5,11 @@ export default {
       link: '/dashboard',
       icon: '/assets/img/tachometer-alt-solid.svg',
     },
-    {
-      title: 'Users',
-      link: '/dashboard/users',
-      icon: '/assets/img/users.svg',
-    },
+    // {
+    //   title: 'Users',
+    //   link: '/dashboard/users',
+    //   icon: '/assets/img/users.svg',
+    // },
     {
       title: 'Van',
       link: '/dashboard/van',

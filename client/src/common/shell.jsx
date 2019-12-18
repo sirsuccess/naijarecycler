@@ -30,7 +30,7 @@ export default function Shell(props) {
               alt=""
               width="150"
               height="50"
-              alt="Naija recycler logo"
+              // alt="Naija recycler logo"
             />
           </Link>
         </ImageContainer>
@@ -176,10 +176,7 @@ const UL = styled.ul`
 //   color: '#09090e',
 //   fill: '#09090e',
 // };
-const ImgMenu = {
-  color: "white",
-  backgroundColor: "white"
-};
+
 const Item = styled.li`
   display: flex;
   align-items: center;

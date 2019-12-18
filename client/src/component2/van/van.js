@@ -1,7 +1,7 @@
 import React, { useEffect, Fragment, useState } from "react";
 import Axios from "axios";
 import { Table } from "reactstrap";
-import { GetAllUsers } from "../AxiosData";
+
 import Model from "../model/model"
 
 

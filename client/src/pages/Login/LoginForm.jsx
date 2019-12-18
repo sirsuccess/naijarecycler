@@ -1,14 +1,58 @@
-import React from "react";
+import React, { useState } from "react";
+import Axios from "axios";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
-export default function LoginForm() {
+export default function LoginForm(props) {
+  let history = useHistory();
+  const initialDetails = {
+    username: "",
+    password: ""
+  };
+  const [userDetails, setuserDetails] = useState(initialDetails);
+  const [response, setResponse] = useState("");
+
+  const handleChange = e => {
+    e.preventDefault();
+    const value = e.target.value;
+    const name = e.target.name;
+    setuserDetails({ ...userDetails, [name]: value });
+  };
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const url = "http://localhost:5000/users/login";
+    Axios.post(url, userDetails)
+      .then(function(response) {
+        alert("login successfully");
+        // if (response.data.isAdmin) {
+        history.push({
+          pathname: "/dashboard",
+          search: "?query=abc",
+          state: { detail: response.data }
+        });
+        // }else{
+        //   history.push({
+        //     pathname: "/",
+        //     search: "?query=abc",
+        //     state: { detail: response.data }
+        //   });
+        // }
+      })
+      .catch(function(error) {
+        console.log(error);
+        history.push({
+          pathname: "/login",
+        });
+      });
+  }
+
   return (
     <div style={{ margin: "0 auto" }}>
-      <div style={{ marginTop: "20px",}}>
+      <div style={{ marginTop: "20px" }}>
         <h3>Login</h3>
       </div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div>
           <Label htmlFor="username">Username:</Label>
           <Input
@@ -16,7 +60,9 @@ export default function LoginForm() {
             id="username"
             name="username"
             autoComplete="username"
-            form-control
+            class="form-control"
+            required
+            onChange={handleChange}
           />
         </div>
         <div>
@@ -25,7 +71,9 @@ export default function LoginForm() {
             type="password"
             id="password"
             name="password"
+            required
             autoComplete="current-password"
+            onChange={handleChange}
           />
         </div>
 

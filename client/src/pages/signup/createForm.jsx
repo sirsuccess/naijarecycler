@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Axios from "axios";
 import { Alert } from "reactstrap";
-import { Link } from "react-router-dom";
+
 
 export default function CreateForm() {
   const initialDetails = {
@@ -28,7 +28,7 @@ export default function CreateForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const url = "http://localhost:5001/users";
+    const url = "http://localhost:5000/users";
 
     Axios.post(url, userDetails)
       .then(function(response) {
@@ -39,13 +39,7 @@ export default function CreateForm() {
         console.log(error);
       });
   };
-  const ComparePass = () => {
-    console.log("i just blue");
-    if (userDetails.password !== userDetails.confirmPass) {
-      return setResponse("confirm password does not match password");
-    }
-    return setResponse("");
-  };
+
   console.log(userDetails);
 
   return (
