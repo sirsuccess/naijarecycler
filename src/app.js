@@ -1,59 +1,51 @@
-const express = require("express");
-const cors = require("cors");
-var http = require("http");
+import React from "react";
+import "./App.css";
 
-require("./db/db");
-const userRouter = require("./controllers/user");
-const wasteRouter = require("./controllers/waste");
-const vehicleRouter = require("./controllers/vehicle");
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-const app = express();
+import Homepage from "./pages/Homepage";
+import Composting from "./pages/Composting/index";
+import About from "./pages/About";
+import Recycling from "./pages/Recycling";
+import WasteCollection from "./pages/Waste-collection/index";
+import Signup from "./pages/signup/createProfile";
+import Login from "./pages/Login/Login";
+import Dashboard from "./component2/dashboard";
 
-app.use(express.urlencoded({ extended: false }));
-/**
- * Read environment variables
- */
-require("dotenv").config();
-
-/**
- * cross origin resort sharing
- */
-app.use(cors());
-
-app.use(express.json());
-
-/**
- * Base Route
- */
-app.use("/users", userRouter);
-app.use("/wastes", wasteRouter);
-app.use("/vehicles", vehicleRouter);
-
-// Server static assets if in production
-if (process.env.NODE_ENV === "production") {
-  // Set static folder
-  app.use(express.static("client/build"));
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-  });
+function App() {
+  return (
+    <div className="App">
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Homepage} />
+          <Route exact path="/about" component={About} />
+          <Route exact path="/waste-collection" component={WasteCollection} />
+          <Route exact path="/Recycling" component={Recycling} />
+          <Route exact path="/Composting" component={Composting} />
+          <Route exact path="/signup" component={Signup} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/dashboard">
+            <Dashboard />
+          </Route>
+          <Route exact path="/dashboard/users">
+            <Dashboard />
+          </Route>
+          <Route exact path="/dashboard/van">
+            <Dashboard />
+          </Route>
+          <Route exact path="/dashboard/waste">
+            <Dashboard />
+          </Route>
+          <Route exact path="/dashboard/dispatch">
+            <Dashboard />
+          </Route>
+          <Route exact path="/dashboard/profile">
+            <Dashboard />
+          </Route>
+        </Switch>
+      </Router>
+    </div>
+  );
 }
 
-/**
- * Create HTTP server.
- */
-
-var server = http.createServer(app);
-
-/**
- * Listen on provided port, on all network interfaces.
- */
-const port = process.env.PORT || 5000;
-
-server.listen(port);
-server.on("error", err => {
-  console.log(`Server running on port ${err}`);
-});
-server.on("listening", () => {
-  console.log(`Server running on port ${port}`);
-});
+export default App;
