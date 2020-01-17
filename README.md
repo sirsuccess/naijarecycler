@@ -1,8 +1,8 @@
 # Naija Recycler
 
-Site: [Transact Article](https://naijarecycler.herokuapp.com/)
+Site: [Naija Recycler](https://naijarecycler.herokuapp.com/)
 
-![transact](/public/assets/img/mainPage.PNG)
+![Main page](/public/assets/img/mainPage.PNG)
 
 # Problem
 
