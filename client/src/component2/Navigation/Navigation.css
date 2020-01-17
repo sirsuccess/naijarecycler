@@ -1,16 +1,13 @@
-
-
-
 .nav-bg {
-    background-color: #000;
+    z-index: 88;
     padding-left: 30%;
     padding: 20px;
-   
-    
 }
+
 .logo1 {
     margin-left: 10rem;
 }
+
 .button {
     background: rgb(16, 199, 190);
     border-radius: 30px;
@@ -21,11 +18,12 @@
     color: white;
     font-weight: bold;
 }
+
 .nav-header {
     border: 5px solid white;
     width: 255px;
     margin-left: 40%;
-    
+
 }
 
 @media screen and (max-width: 1000px) {
@@ -34,11 +32,13 @@
         width: 170px;
         font-size: 25px;
     }
+
     .navbar-light .navbar-toggler {
         color: white;
         background-color: white;
         border: 1px solid white;
     }
+
     .logo1 {
         margin-left: 0%;
     }
