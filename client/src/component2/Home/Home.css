@@ -1,19 +1,21 @@
-
 .home {
-    background: black;
+    /* background: black; */
     opacity: 0.9;
-    overflow: hidden;;
+    overflow: hidden;
+    ;
 }
+
 .logo {
     position: absolute;
     top: 15%;
     left: 10%;
 }
+
 .home-image {
     position: relative;
     background: black;
     opacity: 1;
-    
+
 }
 
 .home-div {
@@ -24,6 +26,7 @@
     height: 200px;
     bottom: 10%;
 }
+
 .home-div-div {
     display: flex;
     flex-direction: row;
@@ -36,6 +39,7 @@
     padding: 10px;
     margin: 10px;
 }
+
 .home-div-div-paragraph {
     color: grey;
     margin-left: 10%;
@@ -46,23 +50,23 @@
     .home-image {
         width: 100%;
     }
+
     .logo {
         width: 100%;
         left: 0;
     }
+
     .home-div {
         display: flex;
         flex-direction: column;
         width: 100%;
         margin-left: 0%;
         margin-top: 10%
-      
-        
     }
+
     .home-div-div {
         width: 90%;
         margin: 2px auto;
     }
 
 }
-

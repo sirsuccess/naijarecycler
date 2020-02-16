@@ -5,7 +5,7 @@ import { Navbar, Nav, Button } from "react-bootstrap";
 function Navigation() {
   return (
     <div>
-      <Navbar expand="lg" className="nav-bg bg-dark">
+      <Navbar expand="lg" className="nav-bg ">
         <Navbar.Brand href="/">
           <img
             className="logo1"
