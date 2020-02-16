@@ -5,7 +5,7 @@
   "author": "Amani Kanu",
   "license": "MIT",
   "engines": {
-    "node": "12.16.0"
+    "node": "12.13.0"
   },
   "scripts": {
     "client-install": "npm install --prefix client",
