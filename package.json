@@ -5,7 +5,8 @@
   "author": "Amani Kanu",
   "license": "MIT",
   "engines": {
-    "node": "12.13.0"
+    "node": "12.13.0",
+    "npm": "6.x"
   },
   "scripts": {
     "client-install": "npm install --prefix client",
@@ -13,7 +14,7 @@
     "server": "nodemon src/app.js",
     "client": "npm start --prefix client",
     "build": "grunt dist",
-    "postinstall": "./node_modules/bower/bin/bower install && npm run build",
+    "postinstall": "npm run build",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
