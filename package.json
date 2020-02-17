@@ -14,7 +14,7 @@
     "server": "nodemon src/app.js",
     "client": "npm start --prefix client",
     "build": "grunt dist",
-    "postinstall": "node.exe node_modules/bower/bin/bower install && npm run build",
+    "postinstall": "node ./node_modules/bower/bin/bower install && npm run build",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
