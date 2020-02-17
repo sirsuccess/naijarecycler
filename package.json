@@ -5,7 +5,7 @@
   "author": "Amani Kanu",
   "license": "MIT",
   "engines": {
-    "node": "12.13.0",
+    "node": "10.16.3",
     "npm": "6.x"
   },
   "scripts": {
